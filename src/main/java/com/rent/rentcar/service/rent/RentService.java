@@ -12,5 +12,5 @@ public interface RentService {
     RentDto updateRent(Long id, RentToSaveDto rentToSaveDto) throws NotFoundExceptionEntity;
     void deleteRent(Long id);
     List<RentDto> getAllRents();
-    List<RentDto> getAllRentsByUserId(Long userId);
+    List<RentDto> getAllRentsByUserIdCard(String userIdCard);
 }

@@ -69,8 +69,8 @@ public class RentServiceImpl implements RentService{
     }
 
     @Override
-    public List<RentDto> getAllRentsByUserId(Long userId) {
-        return rentRepository.findByUserId(userId)
+    public List<RentDto> getAllRentsByUserIdCard(String userIdCard) {
+        return rentRepository.findByUser_IdCard(userIdCard)
                 .stream()
                 .map(rentMapper::toDto)
                 .toList();

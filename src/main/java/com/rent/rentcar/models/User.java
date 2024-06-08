@@ -2,7 +2,6 @@ package com.rent.rentcar.models;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
@@ -10,6 +9,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,7 @@ public class User {
     private String lastName;
 
     @Column(nullable = false, unique = true)
-    private String email;
+    private String idCard;
 
     private String address;
 

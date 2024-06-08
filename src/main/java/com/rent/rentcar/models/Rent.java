@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class Rent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

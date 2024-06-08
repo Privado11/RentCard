@@ -1,6 +1,6 @@
 package com.rent.rentcar.service.user;
 
-import com.rent.rentcar.dto.user.USerMapper;
+import com.rent.rentcar.dto.user.UserMapper;
 import com.rent.rentcar.dto.user.UserDto;
 import com.rent.rentcar.dto.user.UserToSaveDto;
 import com.rent.rentcar.exception.NotAbleToDeleteException;
@@ -16,10 +16,10 @@ import java.util.List;
 public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
-    private final USerMapper userMapper;
+    private final UserMapper userMapper;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, USerMapper userMapper) {
+    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
     }
@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService{
                 .map(user -> {
                     user.setName(userToSaveDto.name());
                     user.setLastName(userToSaveDto.lastName());
-                    user.setEmail(userToSaveDto.email());
+                    user.setIdCard(userToSaveDto.idCard());
                     user.setPhone(userToSaveDto.phone());
                     user.setAddress(userToSaveDto.address());
 

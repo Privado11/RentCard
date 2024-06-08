@@ -61,8 +61,8 @@ public class RentController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<RentDto>> getAllRentsByUserId(@PathVariable Long userId) {
-        List<RentDto> rentsByUserId = rentService.getAllRentsByUserId(userId);
+    public ResponseEntity<List<RentDto>> getAllRentsByUserId(@PathVariable String userIdCard) {
+        List<RentDto> rentsByUserId = rentService.getAllRentsByUserIdCard(userIdCard);
         return ResponseEntity.ok(rentsByUserId);
     }
 }
