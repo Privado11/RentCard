@@ -5,6 +5,8 @@ import com.rent.rentcar.dto.car.CarDto;
 import com.rent.rentcar.dto.car.CarToSaveDto;
 import com.rent.rentcar.exception.NotFoundExceptionEntity;
 
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface CarService {
@@ -15,5 +17,6 @@ public interface CarService {
     List<CarDto> getAllCars();
     List<CarDto> getAllAvailableCars();
     List<CarDto> getAllCarsByCityName(String city);
+    List<CarDto> findAvailableCarsInCity(Long cityId, LocalDateTime startDate, LocalDateTime endDate);
 
 }
