@@ -5,10 +5,12 @@ import com.rent.rentcar.dto.car.CarToSaveDto;
 import com.rent.rentcar.exception.NotFoundExceptionEntity;
 import com.rent.rentcar.service.car.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -70,5 +72,13 @@ public class CarController {
     public ResponseEntity<List<CarDto>> getAllCarsByCityName(@PathVariable String city) {
         List<CarDto> carsByCity = carService.getAllCarsByCityName(city);
         return ResponseEntity.ok(carsByCity);
+    }
+    @GetMapping("/availables")
+    public ResponseEntity<List<CarDto>> findAvailableCarsInCity(
+            @RequestParam("cityId") Long cityId,
+            @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+            @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
+        List<CarDto> availableCars = carService.findAvailableCarsInCity(cityId, startDate, endDate);
+        return ResponseEntity.ok(availableCars);
     }
 }

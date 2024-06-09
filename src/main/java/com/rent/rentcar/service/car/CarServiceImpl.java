@@ -10,6 +10,7 @@ import com.rent.rentcar.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -82,6 +83,14 @@ public class CarServiceImpl implements CarService{
     @Override
     public List<CarDto> getAllCarsByCityName(String city) {
         return carRepository.findByCity_Name(city)
+                .stream()
+                .map(carMapper::toDto)
+                .toList();
+    }
+
+    @Override
+    public List<CarDto> findAvailableCarsInCity(Long cityId, LocalDateTime startDate, LocalDateTime endDate) {
+        return carRepository.findAvailableCarsInCity(cityId, startDate, endDate)
                 .stream()
                 .map(carMapper::toDto)
                 .toList();
