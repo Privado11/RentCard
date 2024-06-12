@@ -18,7 +18,7 @@ class UserMapperTest {
     @Test
     void toDto() {
         // Given
-        User user = new User(1L, "John", "Doe", "1234567", "123 Main St", "555-1234");
+        User user = new User(1L, "John", "Doe", "1234567", "privado@privado.com","123 Main St", "555-1234", "Privado", null);
 
         // When
         UserDto userDto = userMapper.toDto(user);

@@ -3,7 +3,6 @@ package com.rent.rentcar.models;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 
 @Entity
@@ -13,7 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Builder
-public class Rent {
+public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,5 +35,8 @@ public class Rent {
     @ManyToOne()
     @JoinColumn(name = "car_id", nullable = false)
     private Car car;
+
+    @OneToOne(mappedBy = "reservation")
+    private Invoice invoice;
 
 }

@@ -1,11 +1,11 @@
 package com.rent.rentcar.service.rent;
 
-import com.rent.rentcar.dto.rent.RentDto;
-import com.rent.rentcar.dto.rent.RentMapper;
-import com.rent.rentcar.dto.rent.RentToSaveDto;
+import com.rent.rentcar.dto.reservation.ReservationDto;
+import com.rent.rentcar.dto.reservation.ReservationMapper;
+import com.rent.rentcar.dto.reservation.ReservationToSaveDto;
 import com.rent.rentcar.exception.NotAbleToDeleteException;
 import com.rent.rentcar.exception.NotFoundExceptionEntity;
-import com.rent.rentcar.models.Rent;
+import com.rent.rentcar.models.Reservation;
 import com.rent.rentcar.repository.RentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,63 +16,63 @@ import java.util.List;
 public class RentServiceImpl implements RentService{
 
     private final RentRepository rentRepository;
-    private final RentMapper rentMapper;
+    private final ReservationMapper reservationMapper;
 
     @Autowired
-    public RentServiceImpl(RentRepository rentRepository, RentMapper rentMapper) {
+    public RentServiceImpl(RentRepository rentRepository, ReservationMapper reservationMapper) {
         this.rentRepository = rentRepository;
-        this.rentMapper = rentMapper;
+        this.reservationMapper = reservationMapper;
     }
 
     @Override
-    public RentDto getRentById(Long id) throws NotFoundExceptionEntity {
-        Rent rent = rentRepository.findById(id)
+    public ReservationDto getRentById(Long id) throws NotFoundExceptionEntity {
+        Reservation reservation = rentRepository.findById(id)
                 .orElseThrow(() -> new NotFoundExceptionEntity("Rent not found."));
-        return rentMapper.toDto(rent);
+        return reservationMapper.toDto(reservation);
     }
 
     @Override
-    public RentDto addRent(RentToSaveDto rentToSaveDto) {
-        Rent rent = rentMapper.saveDtoToEntity(rentToSaveDto);
-        return rentMapper.toDto(rentRepository.save(rent));
+    public ReservationDto addRent(ReservationToSaveDto reservationToSaveDto) {
+        Reservation reservation = reservationMapper.saveDtoToEntity(reservationToSaveDto);
+        return reservationMapper.toDto(rentRepository.save(reservation));
     }
 
     @Override
-    public RentDto updateRent(Long id, RentToSaveDto rentToSaveDto) throws NotFoundExceptionEntity {
+    public ReservationDto updateRent(Long id, ReservationToSaveDto reservationToSaveDto) throws NotFoundExceptionEntity {
         return rentRepository.findById(id)
                 .map(rent -> {
-                    rent.setStartDate(rentToSaveDto.startDate());
-                    rent.setEndDate(rentToSaveDto.endDate());
-                    rent.setCar(rentToSaveDto.car());
-                    rent.setUser(rentToSaveDto.user());
-                    rent.setTotalPrice(rentToSaveDto.totalPrice());
+                    rent.setStartDate(reservationToSaveDto.startDate());
+                    rent.setEndDate(reservationToSaveDto.endDate());
+                    rent.setCar(reservationToSaveDto.car());
+                    rent.setUser(reservationToSaveDto.user());
+                    rent.setTotalPrice(reservationToSaveDto.totalPrice());
 
-                    Rent rentSaved = rentRepository.save(rent);
-                    return rentMapper.toDto(rentSaved);
+                    Reservation reservationSaved = rentRepository.save(rent);
+                    return reservationMapper.toDto(reservationSaved);
                 }).orElseThrow(() -> new NotFoundExceptionEntity("Rent not found."));
     }
 
     @Override
     public void deleteRent(Long id){
-        Rent rent = rentRepository.findById(id)
+        Reservation reservation = rentRepository.findById(id)
                 .orElseThrow(() -> new NotAbleToDeleteException("Rent not found."));
-        rentRepository.delete(rent);
+        rentRepository.delete(reservation);
 
     }
 
     @Override
-    public List<RentDto> getAllRents() {
+    public List<ReservationDto> getAllRents() {
         return rentRepository.findAll()
                 .stream()
-                .map(rentMapper::toDto)
+                .map(reservationMapper::toDto)
                 .toList();
     }
 
     @Override
-    public List<RentDto> getAllRentsByUserIdCard(String userIdCard) {
+    public List<ReservationDto> getAllRentsByUserIdCard(String userIdCard) {
         return rentRepository.findByUser_IdCard(userIdCard)
                 .stream()
-                .map(rentMapper::toDto)
+                .map(reservationMapper::toDto)
                 .toList();
     }
 }

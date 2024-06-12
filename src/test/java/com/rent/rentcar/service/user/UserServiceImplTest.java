@@ -35,7 +35,7 @@ class UserServiceImplTest {
     @Test
     void testGetUserById() throws NotFoundExceptionEntity {
         Long userId = 1L;
-        User user = new User(userId, "John", "Doe", "1234567", "123 Main St", "555-1234");
+        User user = new User(1L, "John", "Doe", "1234567", "privado@privado.com","123 Main St", "555-1234", "Privado", null);
         when(userRepository.findById(userId)).thenReturn(Optional.of(user));
 
         UserDto userDto = new UserDto(userId, "John", "Doe", "1234567", "123 Main St", "555-1234");
@@ -52,7 +52,7 @@ class UserServiceImplTest {
     void testAddUser() {
         UserDto newUserDto = new UserDto(1l, "John", "Doe", "1234567", "123 Main St", "555-1234");
         UserToSaveDto newUserDto1 = new UserToSaveDto(null, "John", "Doe", "1234567", "123 Main St", "555-1234");
-        User newUser = new User(null, "John", "Doe", "1234567", "123 Main St", "555-1234");
+        User newUser = new User(1L, "John", "Doe", "1234567", "privado@privado.com","123 Main St", "555-1234", "Privado", null);
         when(userRepository.save(newUser)).thenReturn(newUser);
         when(userMapper.saveDtoToEntity(newUserDto1)).thenReturn(newUser);
         when(userMapper.toDto(newUser)).thenReturn(newUserDto);
@@ -74,7 +74,7 @@ class UserServiceImplTest {
         UserDto updatedUserDto = new UserDto(userId, "Updated", "User", "1234567", "123 Main St", "555-1234");
         UserToSaveDto newUserDto1 = new UserToSaveDto(null, "John", "Doe", "1234567", "123 Main St", "555-1234");
 
-        User updatedUser = new User(userId, "Updated", "User", "1234567", "123 Main St", "555-1234");
+        User updatedUser = new User(1L, "John", "Doe", "1234567", "privado@privado.com","123 Main St", "555-1234", "Privado", null);
         when(userRepository.findById(userId)).thenReturn(Optional.of(updatedUser));
         when(userRepository.save(updatedUser)).thenReturn(updatedUser);
         when(userMapper.toDto(updatedUser)).thenReturn(updatedUserDto);
@@ -91,7 +91,7 @@ class UserServiceImplTest {
     @Test
     void testDeleteUser() {
         Long userId = 1L;
-        User updatedUser = new User(userId, "Updated", "User", "1234567", "123 Main St", "555-1234");
+        User updatedUser = new User(1L, "John", "Doe", "1234567", "privado@privado.com","123 Main St", "555-1234", "Privado", null);
         when(userRepository.findById(userId)).thenReturn(Optional.of(updatedUser));
         userService.deleteUser(userId);
 

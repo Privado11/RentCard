@@ -1,8 +1,8 @@
 package com.rent.rentcar.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rent.rentcar.dto.rent.RentDto;
-import com.rent.rentcar.dto.rent.RentToSaveDto;
+import com.rent.rentcar.dto.reservation.ReservationDto;
+import com.rent.rentcar.dto.reservation.ReservationToSaveDto;
 import com.rent.rentcar.service.rent.RentService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,9 +19,9 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(RentController.class)
+@WebMvcTest(ReservationController.class)
 @ExtendWith(MockitoExtension.class)
-class RentControllerTest {
+class ReservationControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -29,18 +29,18 @@ class RentControllerTest {
     @MockBean
     private RentService rentService;
 
-    private RentDto rentDto;
-    private RentToSaveDto rentToSaveDto;
+    private ReservationDto reservationDto;
+    private ReservationToSaveDto reservationToSaveDto;
 
     @BeforeEach
     void setUp() {
-        rentDto = new RentDto(1L, null, null, null, null, null);
-        rentToSaveDto = new RentToSaveDto(1L, null, null, null, null, null);
+        reservationDto = new ReservationDto(1L, null, null, null, null, null);
+        reservationToSaveDto = new ReservationToSaveDto(1L, null, null, null, null, null);
     }
 
     @Test
     void getAllRents() throws Exception {
-        List<RentDto> rents = Collections.singletonList(rentDto);
+        List<ReservationDto> rents = Collections.singletonList(reservationDto);
         when(rentService.getAllRents()).thenReturn(rents);
 
         mockMvc.perform(get("/api/v1/rents"))
@@ -50,7 +50,7 @@ class RentControllerTest {
 
     @Test
     void getRentById() throws Exception {
-        when(rentService.getRentById(1L)).thenReturn(rentDto);
+        when(rentService.getRentById(1L)).thenReturn(reservationDto);
 
         mockMvc.perform(get("/api/v1/rents/{id}", 1L))
                 .andExpect(status().isOk())
@@ -59,21 +59,21 @@ class RentControllerTest {
 
     @Test
     void saveRent() throws Exception {
-        when(rentService.addRent(rentToSaveDto)).thenReturn(rentDto);
+        when(rentService.addRent(reservationToSaveDto)).thenReturn(reservationDto);
 
         mockMvc.perform(post("/api/v1/rents")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(new ObjectMapper().writeValueAsString(rentToSaveDto)))
+                        .content(new ObjectMapper().writeValueAsString(reservationToSaveDto)))
                 .andExpect(status().isCreated());
     }
 
     @Test
     void updateRent() throws Exception {
-        when(rentService.updateRent(1L, rentToSaveDto)).thenReturn(rentDto);
+        when(rentService.updateRent(1L, reservationToSaveDto)).thenReturn(reservationDto);
 
         mockMvc.perform(put("/api/v1/rents/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(new ObjectMapper().writeValueAsString(rentToSaveDto)))
+                        .content(new ObjectMapper().writeValueAsString(reservationToSaveDto)))
                 .andExpect(status().isOk());
     }
 

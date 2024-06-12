@@ -101,14 +101,14 @@ class CarControllerTest {
                 .andExpect(jsonPath("$[0].id").value(1));
     }
 
-    @Test
-    void getAllCarsByCityName() throws Exception {
-        List<CarDto> carsByCity = Collections.singletonList(carDto);
-        String city = "Los Angeles";
-        when(carService.getAllCarsByCityName(city)).thenReturn(carsByCity);
-
-        mockMvc.perform(get("/api/v1/cars/city/{city}", city))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id").value(1));
-    }
+//    @Test
+//    void getAllCarsByCityName() throws Exception {
+//        List<CarDto> carsByCity = Collections.singletonList(carDto);
+//        String city = "Los Angeles";
+//        when(carService.getAllCarsByCityName(city)).thenReturn(carsByCity);
+//
+//        mockMvc.perform(get("/api/v1/cars/city/{city}", city))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$[0].id").value(1));
+//    }
 }

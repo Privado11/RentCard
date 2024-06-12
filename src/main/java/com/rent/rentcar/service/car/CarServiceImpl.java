@@ -80,19 +80,19 @@ public class CarServiceImpl implements CarService{
                 .toList();
     }
 
-    @Override
-    public List<CarDto> getAllCarsByCityName(String city) {
-        return carRepository.findByCity_Name(city)
-                .stream()
-                .map(carMapper::toDto)
-                .toList();
-    }
-
-    @Override
-    public List<CarDto> findAvailableCarsInCity(Long cityId, LocalDateTime startDate, LocalDateTime endDate) {
-        return carRepository.findAvailableCarsInCity(cityId, startDate, endDate)
-                .stream()
-                .map(carMapper::toDto)
-                .toList();
-    }
+//    @Override
+//    public List<CarDto> getAllCarsByCityName(String city) {
+//        return carRepository.findByCity_Name(city)
+//                .stream()
+//                .map(carMapper::toDto)
+//                .toList();
+//    }
+//
+//    @Override
+//    public List<CarDto> findAvailableCarsInCity(Long cityId, LocalDateTime startDate, LocalDateTime endDate) {
+//        return carRepository.findAvailableCarsInCity(cityId, startDate, endDate)
+//                .stream()
+//                .map(carMapper::toDto)
+//                .toList();
+//    }
 }

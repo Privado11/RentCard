@@ -1,7 +1,7 @@
 package com.rent.rentcar.repository;
 
 import com.rent.rentcar.models.Car;
-import com.rent.rentcar.models.Rent;
+import com.rent.rentcar.models.Reservation;
 import com.rent.rentcar.models.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class RentRepositoryTest extends AbstractIntegrationDBTest{
+class ReservationRepositoryTest extends AbstractIntegrationDBTest{
 
 
     RentRepository rentRepository;
@@ -20,7 +20,7 @@ class RentRepositoryTest extends AbstractIntegrationDBTest{
     CarRepository carRepository;
 
     @Autowired
-    public RentRepositoryTest(RentRepository rentRepository, UserRepository userRepository, CarRepository carRepository) {
+    public ReservationRepositoryTest(RentRepository rentRepository, UserRepository userRepository, CarRepository carRepository) {
         this.rentRepository = rentRepository;
         this.userRepository = userRepository;
         this.carRepository = carRepository;
@@ -69,7 +69,7 @@ class RentRepositoryTest extends AbstractIntegrationDBTest{
         LocalDateTime endDate = startDate.plus(Duration.ofDays(5));
         double totalPrice = 1000.00;
 
-        Rent rent = Rent.builder()
+        Reservation reservation = Reservation.builder()
                 .car(car)
                 .user(user)
                 .startDate(startDate)
@@ -77,8 +77,8 @@ class RentRepositoryTest extends AbstractIntegrationDBTest{
                 .totalPrice(totalPrice)
                 .build();
 
-        Rent savedRent = rentRepository.save(rent);
-        assertNotNull(savedRent.getId());
+        Reservation savedReservation = rentRepository.save(reservation);
+        assertNotNull(savedReservation.getId());
     }
 
     @Test
@@ -88,7 +88,7 @@ class RentRepositoryTest extends AbstractIntegrationDBTest{
         LocalDateTime endDate = startDate.plus(Duration.ofDays(5));
         double totalPrice = 1000.00;
 
-        Rent rent = Rent.builder()
+        Reservation reservation = Reservation.builder()
                 .car(car)
                 .user(user)
                 .startDate(startDate)
@@ -96,9 +96,9 @@ class RentRepositoryTest extends AbstractIntegrationDBTest{
                 .totalPrice(totalPrice)
                 .build();
 
-        rentRepository.save(rent);
+        rentRepository.save(reservation);
 
-        Iterable<Rent> rents = rentRepository.findAll();
+        Iterable<Reservation> rents = rentRepository.findAll();
         assertTrue(rents.iterator().hasNext());
     }
 
@@ -109,7 +109,7 @@ class RentRepositoryTest extends AbstractIntegrationDBTest{
         LocalDateTime endDate = startDate.plus(Duration.ofDays(5));
         double totalPrice = 1000.00;
 
-        Rent rent = Rent.builder()
+        Reservation reservation = Reservation.builder()
                 .car(car)
                 .user(user)
                 .startDate(startDate)
@@ -117,13 +117,13 @@ class RentRepositoryTest extends AbstractIntegrationDBTest{
                 .totalPrice(totalPrice)
                 .build();
 
-        Rent savedRent = rentRepository.save(rent);
+        Reservation savedReservation = rentRepository.save(reservation);
         LocalDateTime newEndDate = endDate.plus(Duration.ofDays(3));
-        savedRent.setEndDate(newEndDate);
+        savedReservation.setEndDate(newEndDate);
 
-        Rent updatedRent = rentRepository.save(savedRent);
+        Reservation updatedReservation = rentRepository.save(savedReservation);
 
-        assertEquals(newEndDate, updatedRent.getEndDate());
+        assertEquals(newEndDate, updatedReservation.getEndDate());
     }
 
     @Test
@@ -133,7 +133,7 @@ class RentRepositoryTest extends AbstractIntegrationDBTest{
         LocalDateTime endDate = startDate.plus(Duration.ofDays(5));
         double totalPrice = 1000.00;
 
-        Rent rent = Rent.builder()
+        Reservation reservation = Reservation.builder()
                 .car(car)
                 .user(user)
                 .startDate(startDate)
@@ -141,9 +141,9 @@ class RentRepositoryTest extends AbstractIntegrationDBTest{
                 .totalPrice(totalPrice)
                 .build();
 
-        Rent savedRent = rentRepository.save(rent);
-        rentRepository.deleteById(savedRent.getId());
+        Reservation savedReservation = rentRepository.save(reservation);
+        rentRepository.deleteById(savedReservation.getId());
 
-        assertFalse(rentRepository.existsById(savedRent.getId()));
+        assertFalse(rentRepository.existsById(savedReservation.getId()));
     }
 }
