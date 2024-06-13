@@ -26,6 +26,9 @@ public class SalesBranch {
 
     private String address;
 
+
+    private String name;
+
     @ElementCollection
     @CollectionTable(name = "hours_attention", joinColumns = @JoinColumn(name = "sales_branches_id"))
     @MapKeyColumn(name = "day_week")

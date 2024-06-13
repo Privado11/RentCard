@@ -5,9 +5,10 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "cities")
+@Table(name = "invoices")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -18,9 +19,10 @@ public class Invoice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private double totalAmount;
+    private Double totalAmount;
 
-    private LocalDate issueDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime paymentDate;
 
     @OneToOne
     @JoinColumn(name = "reservation_id")

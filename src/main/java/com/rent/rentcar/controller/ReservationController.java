@@ -3,7 +3,7 @@ package com.rent.rentcar.controller;
 import com.rent.rentcar.dto.reservation.ReservationDto;
 import com.rent.rentcar.dto.reservation.ReservationToSaveDto;
 import com.rent.rentcar.exception.NotFoundExceptionEntity;
-import com.rent.rentcar.service.rent.RentService;
+import com.rent.rentcar.service.reservation.RentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

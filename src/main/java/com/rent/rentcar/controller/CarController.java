@@ -68,17 +68,17 @@ public class CarController {
         return ResponseEntity.ok(availableCars);
     }
 
-//    @GetMapping("/city/{city}")
-//    public ResponseEntity<List<CarDto>> getAllCarsByCityName(@PathVariable String city) {
-//        List<CarDto> carsByCity = carService.getAllCarsByCityName(city);
-//        return ResponseEntity.ok(carsByCity);
-//    }
-//    @GetMapping("/availables")
-//    public ResponseEntity<List<CarDto>> findAvailableCarsInCity(
-//            @RequestParam("cityId") Long cityId,
-//            @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
-//            @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
-//        List<CarDto> availableCars = carService.findAvailableCarsInCity(cityId, startDate, endDate);
-//        return ResponseEntity.ok(availableCars);
-//    }
+    @GetMapping("/sales-branches/city")
+    public ResponseEntity<List<CarDto>> getAllCarsByCityName(@RequestParam("cityName") String cityName) {
+        List<CarDto> carsByCity = carService.getAllCarsByCityName(cityName);
+        return ResponseEntity.ok(carsByCity);
+    }
+    @GetMapping("/availables")
+    public ResponseEntity<List<CarDto>> findAvailableCarsInCity(
+            @RequestParam("cityId") Long cityId,
+            @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+            @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
+        List<CarDto> availableCars = carService.findAvailableCarsInCity(cityId, startDate, endDate);
+        return ResponseEntity.ok(availableCars);
+    }
 }

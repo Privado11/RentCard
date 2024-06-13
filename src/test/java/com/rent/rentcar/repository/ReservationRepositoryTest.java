@@ -15,13 +15,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class ReservationRepositoryTest extends AbstractIntegrationDBTest{
 
 
-    RentRepository rentRepository;
+    ReservationRepository reservationRepository;
     UserRepository userRepository;
     CarRepository carRepository;
 
     @Autowired
-    public ReservationRepositoryTest(RentRepository rentRepository, UserRepository userRepository, CarRepository carRepository) {
-        this.rentRepository = rentRepository;
+    public ReservationRepositoryTest(ReservationRepository reservationRepository, UserRepository userRepository, CarRepository carRepository) {
+        this.reservationRepository = reservationRepository;
         this.userRepository = userRepository;
         this.carRepository = carRepository;
     }
@@ -39,7 +39,6 @@ class ReservationRepositoryTest extends AbstractIntegrationDBTest{
                 .price(200.00)
                 .available(true)
                 .description("Auto de lujo")
-                .city(createCity())
                 .build();
         carRepository.save(car);
         carRepository.flush();
@@ -57,7 +56,7 @@ class ReservationRepositoryTest extends AbstractIntegrationDBTest{
 
     @BeforeEach
     void setUp() {
-        rentRepository.deleteAll();
+        reservationRepository.deleteAll();
         userRepository.deleteAll();
         carRepository.deleteAll();
     }
@@ -77,7 +76,7 @@ class ReservationRepositoryTest extends AbstractIntegrationDBTest{
                 .totalPrice(totalPrice)
                 .build();
 
-        Reservation savedReservation = rentRepository.save(reservation);
+        Reservation savedReservation = reservationRepository.save(reservation);
         assertNotNull(savedReservation.getId());
     }
 
@@ -96,9 +95,9 @@ class ReservationRepositoryTest extends AbstractIntegrationDBTest{
                 .totalPrice(totalPrice)
                 .build();
 
-        rentRepository.save(reservation);
+        reservationRepository.save(reservation);
 
-        Iterable<Reservation> rents = rentRepository.findAll();
+        Iterable<Reservation> rents = reservationRepository.findAll();
         assertTrue(rents.iterator().hasNext());
     }
 
@@ -117,11 +116,11 @@ class ReservationRepositoryTest extends AbstractIntegrationDBTest{
                 .totalPrice(totalPrice)
                 .build();
 
-        Reservation savedReservation = rentRepository.save(reservation);
+        Reservation savedReservation = reservationRepository.save(reservation);
         LocalDateTime newEndDate = endDate.plus(Duration.ofDays(3));
         savedReservation.setEndDate(newEndDate);
 
-        Reservation updatedReservation = rentRepository.save(savedReservation);
+        Reservation updatedReservation = reservationRepository.save(savedReservation);
 
         assertEquals(newEndDate, updatedReservation.getEndDate());
     }
@@ -141,9 +140,9 @@ class ReservationRepositoryTest extends AbstractIntegrationDBTest{
                 .totalPrice(totalPrice)
                 .build();
 
-        Reservation savedReservation = rentRepository.save(reservation);
-        rentRepository.deleteById(savedReservation.getId());
+        Reservation savedReservation = reservationRepository.save(reservation);
+        reservationRepository.deleteById(savedReservation.getId());
 
-        assertFalse(rentRepository.existsById(savedReservation.getId()));
+        assertFalse(reservationRepository.existsById(savedReservation.getId()));
     }
 }

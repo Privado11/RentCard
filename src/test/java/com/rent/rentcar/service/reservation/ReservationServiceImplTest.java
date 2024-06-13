@@ -1,11 +1,11 @@
-package com.rent.rentcar.service.rent;
+package com.rent.rentcar.service.reservation;
 
 import com.rent.rentcar.dto.reservation.ReservationDto;
 import com.rent.rentcar.dto.reservation.ReservationMapper;
 import com.rent.rentcar.dto.reservation.ReservationToSaveDto;
 import com.rent.rentcar.exception.NotFoundExceptionEntity;
 import com.rent.rentcar.models.Reservation;
-import com.rent.rentcar.repository.RentRepository;
+import com.rent.rentcar.repository.ReservationRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,7 +23,7 @@ import static org.mockito.Mockito.*;
 class ReservationServiceImplTest {
 
     @Mock
-    private RentRepository rentRepository;
+    private ReservationRepository reservationRepository;
 
     @Mock
     private ReservationMapper reservationMapper;
@@ -43,7 +43,7 @@ class ReservationServiceImplTest {
     @Test
     void testGetRentById() throws NotFoundExceptionEntity {
         Long rentId = 1L;
-        when(rentRepository.findById(rentId)).thenReturn(Optional.of(reservation));
+        when(reservationRepository.findById(rentId)).thenReturn(Optional.of(reservation));
         when(reservationMapper.toDto(reservation)).thenReturn(reservationDto);
 
         ReservationDto result = rentService.getRentById(rentId);
@@ -56,7 +56,7 @@ class ReservationServiceImplTest {
     void testAddRent() {
         ReservationToSaveDto newRentDto = new ReservationToSaveDto(null, null, null, null, null, null);
         when(reservationMapper.saveDtoToEntity(newRentDto)).thenReturn(reservation);
-        when(rentRepository.save(reservation)).thenReturn(reservation);
+        when(reservationRepository.save(reservation)).thenReturn(reservation);
         when(reservationMapper.toDto(reservation)).thenReturn(reservationDto);
 
         ReservationDto result = rentService.addRent(newRentDto);
@@ -69,8 +69,8 @@ class ReservationServiceImplTest {
     void testUpdateRent() throws NotFoundExceptionEntity {
         Long rentId = 1L;
         ReservationToSaveDto updatedRentDto = new ReservationToSaveDto(rentId, null, null, null, null, null);
-        when(rentRepository.findById(rentId)).thenReturn(Optional.of(reservation));
-        when(rentRepository.save(reservation)).thenReturn(reservation);
+        when(reservationRepository.findById(rentId)).thenReturn(Optional.of(reservation));
+        when(reservationRepository.save(reservation)).thenReturn(reservation);
         when(reservationMapper.toDto(reservation)).thenReturn(reservationDto);
 
         ReservationDto result = rentService.updateRent(rentId, updatedRentDto);
@@ -82,17 +82,17 @@ class ReservationServiceImplTest {
     @Test
     void testDeleteRent() {
         Long rentId = 1L;
-        when(rentRepository.findById(rentId)).thenReturn(Optional.of(reservation));
+        when(reservationRepository.findById(rentId)).thenReturn(Optional.of(reservation));
         rentService.deleteRent(rentId);
 
-        verify(rentRepository, times(1)).delete(reservation);
+        verify(reservationRepository, times(1)).delete(reservation);
     }
 
     @Test
     void testGetAllRents() {
         List<Reservation> reservationList = List.of(new Reservation(1L, null, null, null, null, null, null),
                 new Reservation(2L, null, null, null, null, null, null));
-        when(rentRepository.findAll()).thenReturn(reservationList);
+        when(reservationRepository.findAll()).thenReturn(reservationList);
 
         List<ReservationDto> result = rentService.getAllRents();
 
@@ -105,7 +105,7 @@ class ReservationServiceImplTest {
         String userIdCard = "1234567";
         List<Reservation> reservationList = List.of(new Reservation(1L, null, null, null, null, null, null),
                 new Reservation(2L, null, null, null, null, null, null));
-        when(rentRepository.findByUser_IdCard(userIdCard)).thenReturn(reservationList);
+        when(reservationRepository.findByUser_IdCard(userIdCard)).thenReturn(reservationList);
 
 
         List<ReservationDto> result = rentService.getAllRentsByUserIdCard(userIdCard);

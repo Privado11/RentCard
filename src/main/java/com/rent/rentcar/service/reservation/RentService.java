@@ -1,4 +1,4 @@
-package com.rent.rentcar.service.rent;
+package com.rent.rentcar.service.reservation;
 
 import com.rent.rentcar.dto.reservation.ReservationDto;
 import com.rent.rentcar.dto.reservation.ReservationToSaveDto;

@@ -15,7 +15,7 @@ public interface CarService {
     void deleteCar(Long id);
     List<CarDto> getAllCars();
     List<CarDto> getAllAvailableCars();
-//    List<CarDto> getAllCarsByCityName(String city);
-//    List<CarDto> findAvailableCarsInCity(Long cityId, LocalDateTime startDate, LocalDateTime endDate);
+    List<CarDto> getAllCarsByCityName(String city);
+    List<CarDto> findAvailableCarsInCity(Long cityId, LocalDateTime startDate, LocalDateTime endDate);
 
 }
