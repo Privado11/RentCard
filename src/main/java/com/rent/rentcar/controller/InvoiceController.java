@@ -1,5 +1,6 @@
 package com.rent.rentcar.controller;
 
+import com.rent.rentcar.Enum.PaymentMethod;
 import com.rent.rentcar.dto.invoice.InvoiceDto;
 import com.rent.rentcar.dto.invoice.InvoiceToSaveDto;
 import com.rent.rentcar.exception.NotFoundExceptionEntity;
@@ -69,6 +70,25 @@ public class InvoiceController {
     @GetMapping("/year/{year}/months")
     public ResponseEntity<List<InvoiceDto>> findInvoicesByYearAndMonths(@PathVariable Integer year, @RequestParam List<Integer> months) {
         List<InvoiceDto> invoices = invoiceService.findInvoicesByYearAndMonths(year, months);
+        return ResponseEntity.ok(invoices);
+    }
+
+    @GetMapping("/payment-method")
+    public ResponseEntity<List<InvoiceDto>> findByPaymentMethod(@RequestParam("paymentMethod") PaymentMethod paymentMethod) {
+        List<InvoiceDto> invoices = invoiceService.findByPaymentMethod(paymentMethod);
+        return ResponseEntity.ok(invoices);
+    }
+
+    @GetMapping("/payment-method/month")
+    public ResponseEntity<List<InvoiceDto>> findByPaymentMethodAndMonth(@RequestParam("paymentMethod") PaymentMethod paymentMethod, @RequestParam("month") Integer month) {
+        List<InvoiceDto> invoices = invoiceService.findByPaymentMethodAndMonth(paymentMethod, month);
+        return ResponseEntity.ok(invoices);
+    }
+
+
+    @GetMapping("/payment-method/year")
+    public ResponseEntity<List<InvoiceDto>> findByPaymentMethodAndYear(@RequestParam("paymentMethod") PaymentMethod paymentMethod, @RequestParam("year") Integer year){
+        List<InvoiceDto> invoices = invoiceService.findByPaymentMethodAndYear(paymentMethod, year);
         return ResponseEntity.ok(invoices);
     }
 }

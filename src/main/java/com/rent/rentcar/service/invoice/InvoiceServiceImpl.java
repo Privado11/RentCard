@@ -1,5 +1,6 @@
 package com.rent.rentcar.service.invoice;
 
+import com.rent.rentcar.Enum.PaymentMethod;
 import com.rent.rentcar.dto.invoice.InvoiceDto;
 import com.rent.rentcar.dto.invoice.InvoiceMapper;
 import com.rent.rentcar.dto.invoice.InvoiceToSaveDto;
@@ -71,6 +72,30 @@ public class InvoiceServiceImpl implements InvoiceService{
     @Override
     public List<InvoiceDto> findByPaymentDateYear(Integer year) {
         List<Invoice> invoices = invoiceRepository.findByPaymentDateYear(year);
+        return invoices.stream()
+                .map(invoiceMapper::toDto)
+                .toList();
+    }
+
+    @Override
+    public List<InvoiceDto> findByPaymentMethod(PaymentMethod paymentMethod) {
+        List<Invoice> invoices = invoiceRepository.findByPaymentMethod(paymentMethod);
+        return invoices.stream()
+                .map(invoiceMapper::toDto)
+                .toList();
+    }
+
+    @Override
+    public List<InvoiceDto> findByPaymentMethodAndMonth(PaymentMethod paymentMethod, Integer month) {
+        List<Invoice> invoices = invoiceRepository.findByPaymentMethodAndMonth(paymentMethod, month);
+        return invoices.stream()
+                .map(invoiceMapper::toDto)
+                .toList();
+    }
+
+    @Override
+    public List<InvoiceDto> findByPaymentMethodAndYear(PaymentMethod paymentMethod, Integer year) {
+        List<Invoice> invoices = invoiceRepository.findByPaymentMethodAndYear(paymentMethod, year);
         return invoices.stream()
                 .map(invoiceMapper::toDto)
                 .toList();
