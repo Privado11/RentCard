@@ -1,7 +1,10 @@
 package com.rent.rentcar.models;
 
+import com.rent.rentcar.Enum.TransmissionType;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "cars")
@@ -26,7 +29,17 @@ public class Car {
     private boolean available;
     private String description;
 
+    @Column(length = 1000)
+    private String imageUrl;
+
+    @Enumerated(EnumType.STRING)
+    private TransmissionType transmissionType;
+
     @ManyToOne
-    @JoinColumn(name = "city_id", nullable = false)
-    private City city;
+    @JoinColumn(name = "sales_branches_id")
+    private SalesBranch salesBranch;
+
+    @OneToMany(mappedBy = "car")
+    private List<Reservation> reservations;
+
 }

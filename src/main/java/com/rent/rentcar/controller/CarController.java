@@ -68,9 +68,9 @@ public class CarController {
         return ResponseEntity.ok(availableCars);
     }
 
-    @GetMapping("/city/{city}")
-    public ResponseEntity<List<CarDto>> getAllCarsByCityName(@PathVariable String city) {
-        List<CarDto> carsByCity = carService.getAllCarsByCityName(city);
+    @GetMapping("/sales-branches/city")
+    public ResponseEntity<List<CarDto>> getAllCarsByCityName(@RequestParam("cityName") String cityName) {
+        List<CarDto> carsByCity = carService.getAllCarsByCityName(cityName);
         return ResponseEntity.ok(carsByCity);
     }
     @GetMapping("/availables")

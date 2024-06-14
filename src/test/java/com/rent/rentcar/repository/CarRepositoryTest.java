@@ -25,7 +25,6 @@ class CarRepositoryTest extends AbstractIntegrationDBTest {
                 .price(200.00)
                 .available(true)
                 .description("Auto de lujo")
-                .city(createCity())
                 .build();
         carRepository.save(car);
 
@@ -38,7 +37,6 @@ class CarRepositoryTest extends AbstractIntegrationDBTest {
                 .price(200.00)
                 .available(true)
                 .description("Auto de lujo")
-                .city(createCity())
                 .build();
         carRepository.save(car2);
         carRepository.flush();
@@ -60,7 +58,6 @@ class CarRepositoryTest extends AbstractIntegrationDBTest {
                 .price(200.00)
                 .available(true)
                 .description("Auto de lujo")
-                .city(createCity())
                 .build();
 
         Car savedCar = carRepository.save(car);
@@ -80,7 +77,6 @@ class CarRepositoryTest extends AbstractIntegrationDBTest {
                 .price(200.00)
                 .available(true)
                 .description("Auto de lujo")
-                .city(createCity())
                 .build();
 
         Car savedCar = carRepository.save(car);
@@ -102,7 +98,6 @@ class CarRepositoryTest extends AbstractIntegrationDBTest {
                 .price(200.00)
                 .available(true)
                 .description("Auto de lujo")
-                .city(createCity())
                 .build();
 
         Car savedCar = carRepository.save(car);
@@ -124,7 +119,6 @@ class CarRepositoryTest extends AbstractIntegrationDBTest {
                 .price(200.00)
                 .available(true)
                 .description("Auto de lujo")
-                .city(createCity())
                 .build();
 
         Car savedCar = carRepository.save(car);
@@ -140,7 +134,7 @@ class CarRepositoryTest extends AbstractIntegrationDBTest {
     void findByCity_Name_ShouldReturnListOfCarsWithMatchingCityName() {
         initMockCar();
 
-        List<Car> carsInSantaMarta = carRepository.findByCity_Name("Santa Marta");
+        List<Car> carsInSantaMarta = carRepository.findBySalesBranch_City_Name("Santa Marta");
 
         assertThat(carsInSantaMarta).hasSize(2);
     }

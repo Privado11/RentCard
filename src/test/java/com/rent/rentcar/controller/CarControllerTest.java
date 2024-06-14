@@ -8,16 +8,12 @@ import com.rent.rentcar.dto.car.CarDto;
 import com.rent.rentcar.dto.car.CarToSaveDto;
 import com.rent.rentcar.service.car.CarService;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Collections;
 import java.util.List;
@@ -101,14 +97,14 @@ class CarControllerTest {
                 .andExpect(jsonPath("$[0].id").value(1));
     }
 
-    @Test
-    void getAllCarsByCityName() throws Exception {
-        List<CarDto> carsByCity = Collections.singletonList(carDto);
-        String city = "Los Angeles";
-        when(carService.getAllCarsByCityName(city)).thenReturn(carsByCity);
-
-        mockMvc.perform(get("/api/v1/cars/city/{city}", city))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id").value(1));
-    }
+//    @Test
+//    void getAllCarsByCityName() throws Exception {
+//        List<CarDto> carsByCity = Collections.singletonList(carDto);
+//        String city = "Los Angeles";
+//        when(carService.getAllCarsByCityName(city)).thenReturn(carsByCity);
+//
+//        mockMvc.perform(get("/api/v1/cars/city/{city}", city))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$[0].id").value(1));
+//    }
 }

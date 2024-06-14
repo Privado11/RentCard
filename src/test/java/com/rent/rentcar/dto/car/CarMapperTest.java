@@ -31,7 +31,9 @@ class CarMapperTest {
                 .price(200.00)
                 .available(true)
                 .description("Auto de lujo")
-                .city(new City(1l,"CityName"))
+                .imageUrl(null)
+                .transmissionType(null)
+                .reservations(null)
                 .build();
 
         CarDto carDto = carMapper.toDto(car);
@@ -47,7 +49,7 @@ class CarMapperTest {
         assertEquals(car.getPrice(), carDto.price());
         assertEquals(car.isAvailable(), carDto.available());
         assertEquals(car.getDescription(), carDto.description());
-        assertEquals(car.getCity().getName(), carDto.city().name());
+
     }
 
     @Test
@@ -91,6 +93,5 @@ class CarMapperTest {
         assertEquals(carDto.price(), car.getPrice());
         assertEquals(carDto.available(), car.isAvailable());
         assertEquals(carDto.description(), car.getDescription());
-        assertEquals(carDto.city().name(), car.getCity().getName());
     }
 }
