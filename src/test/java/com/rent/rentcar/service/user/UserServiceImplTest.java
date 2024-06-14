@@ -16,6 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -51,7 +52,7 @@ class UserServiceImplTest {
     @Test
     void testAddUser() {
         UserDto newUserDto = new UserDto(1l, "John", "Doe", "1234567", "123 Main St", "555-1234");
-        UserToSaveDto newUserDto1 = new UserToSaveDto(null, "John", "Doe", "1234567", "123 Main St", "555-1234");
+        UserToSaveDto newUserDto1 = new UserToSaveDto(1l, "John", "Doe", "privado@privado.com", "123456", "1234567", "calle 29", null);
         User newUser = new User(1L, "John", "Doe", "1234567", "privado@privado.com","123 Main St", "555-1234", "Privado", null);
         when(userRepository.save(newUser)).thenReturn(newUser);
         when(userMapper.saveDtoToEntity(newUserDto1)).thenReturn(newUser);
@@ -72,7 +73,7 @@ class UserServiceImplTest {
     void testUpdateUser() throws NotFoundExceptionEntity {
         Long userId = 1L;
         UserDto updatedUserDto = new UserDto(userId, "Updated", "User", "1234567", "123 Main St", "555-1234");
-        UserToSaveDto newUserDto1 = new UserToSaveDto(null, "John", "Doe", "1234567", "123 Main St", "555-1234");
+        UserToSaveDto newUserDto1 = new UserToSaveDto(1l, "John", "Doe", "privado@privado.com", "123456", "1234567", "calle 29", null);
 
         User updatedUser = new User(1L, "John", "Doe", "1234567", "privado@privado.com","123 Main St", "555-1234", "Privado", null);
         when(userRepository.findById(userId)).thenReturn(Optional.of(updatedUser));

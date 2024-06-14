@@ -4,7 +4,6 @@ import com.rent.rentcar.Enum.PaymentMethod;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity

@@ -36,7 +36,7 @@ class UserMapperTest {
     @Test
     void saveDtoToEntity() {
         // Given
-        UserToSaveDto userDto = new UserToSaveDto(1L, "John", "Doe", "1234567", "123 Main St", "555-1234");
+        UserToSaveDto userDto = new UserToSaveDto(1l, "John", "Doe", "privado@privado.com", "123456", "1234567", "calle 29", null);
 
         // When
         User user = userMapper.saveDtoToEntity(userDto);

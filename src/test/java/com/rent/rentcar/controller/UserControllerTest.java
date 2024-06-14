@@ -41,7 +41,7 @@ class UserControllerTest {
     @BeforeEach
     void setUp() {
         userDto = new UserDto(1l, "John", "Doe", "1234567", "123 Main St", "555-1234");
-        userToSaveDto = new UserToSaveDto(1l, "John", "Doe", "1234567", "123 Main St", "555-1234");
+        userToSaveDto = new UserToSaveDto(1l, "John", "Doe", "privado@privado.com", "123456", "1234567", "calle 29", null);
     }
 
     @Test
