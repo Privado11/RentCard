@@ -62,7 +62,7 @@ public class ReservationController {
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<ReservationDto>> getAllRentsByUserId(@PathVariable String userId) {
-        List<ReservationDto> rentsByUserId = rentService.getAllRentsByUserIdCard(userIdCard);
+        List<ReservationDto> rentsByUserId = rentService.getAllRentsByUserIdCard(userId);
         return ResponseEntity.ok(rentsByUserId);
     }
 }
