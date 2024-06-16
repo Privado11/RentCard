@@ -19,6 +19,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+
 import com.rent.rentcar.filter.security.JwtAuthFilter;
 import com.rent.rentcar.repository.UserRepository;
 import com.rent.rentcar.service.security.UserInfoService;
@@ -43,7 +45,7 @@ public class SecurityConfig {
         return http
                 .authorizeHttpRequests((authz) -> authz
                         .requestMatchers("/auth/login", "/auth/register").permitAll()
-                        .requestMatchers("/auth/hello").authenticated()
+                        .requestMatchers("/api/v1/**").authenticated()
                 )
                 .httpBasic(withDefaults()).csrf((csrf) -> csrf.disable())
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -52,7 +54,7 @@ public class SecurityConfig {
                 .build();
     }
     @Bean
-    public AuthenticationProvider authenticationProvider(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
+    public AuthenticationProvider authenticationProvider(@Qualifier("userDetailsService") UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsService);
         authenticationProvider.setPasswordEncoder(passwordEncoder);

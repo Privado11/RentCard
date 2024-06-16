@@ -12,4 +12,5 @@ public interface UserService {
     UserDto updateUser(Long id, UserToSaveDto userToSaveDto) throws NotFoundExceptionEntity;
     void deleteUser(Long id);
     List<UserDto> getAllUsers();
+    UserDto getUserByEmail(String email) throws NotFoundExceptionEntity;
 }

@@ -38,6 +38,16 @@ public class UserController {
         }
     }
 
+    @GetMapping("/email")
+    public ResponseEntity<UserDto> getUserByEmail(@RequestParam("email") String email) {
+        try {
+            UserDto userDto = userService.getUserByEmail(email);
+            return ResponseEntity.ok(userDto);
+        } catch (NotFoundExceptionEntity ex) {  
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @PostMapping
     public ResponseEntity<UserDto> saveUser(@RequestBody UserToSaveDto userToSaveDto) {
         UserDto savedUser = userService.addUser(userToSaveDto);
