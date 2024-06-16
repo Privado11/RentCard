@@ -61,7 +61,7 @@ public class ReservationController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<ReservationDto>> getAllRentsByUserId(@PathVariable String userIdCard) {
+    public ResponseEntity<List<ReservationDto>> getAllRentsByUserId(@PathVariable String userId) {
         List<ReservationDto> rentsByUserId = rentService.getAllRentsByUserIdCard(userIdCard);
         return ResponseEntity.ok(rentsByUserId);
     }
