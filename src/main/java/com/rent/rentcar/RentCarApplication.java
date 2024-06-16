@@ -14,20 +14,16 @@ public class RentCarApplication {
         SpringApplication.run(RentCarApplication.class, args);
     }
     @Configuration
-    public static class MyConfiguration {
+    public static class Myconfiguration{
         @Bean
-        public WebMvcConfigurer corsConfigurer() {
+        public WebMvcConfigurer corsConfigurer(){
             return new WebMvcConfigurer() {
                 @Override
                 public void addCorsMappings(CorsRegistry registry) {
                     registry.addMapping("/**")
-                            .allowedOrigins("*") // Permitir solicitudes desde cualquier origen
-                            .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH")
-                            .allowedHeaders("*"); // Permitir todos los encabezados
+                            .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH");
                 }
             };
         }
     }
-
-
 }

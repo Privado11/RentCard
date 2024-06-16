@@ -66,4 +66,11 @@ public class UserServiceImpl implements UserService{
                 .map(userMapper::toDto)
                 .toList();
     }
+
+    @Override
+    public UserDto getUserByEmail(String email) throws NotFoundExceptionEntity {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new NotFoundExceptionEntity("User not found."));
+        return userMapper.toDto(user);
+    }
 }
