@@ -45,6 +45,7 @@ public class SecurityConfig {
         return http
                 .authorizeHttpRequests((authz) -> authz
                         .requestMatchers("/auth/login", "/auth/register").permitAll()
+                        .requestMatchers("/api/v1/cars", "/api/v1/sales-branches").permitAll()
                         .requestMatchers("/api/v1/**").authenticated()
                 )
                 .httpBasic(withDefaults()).csrf((csrf) -> csrf.disable())
